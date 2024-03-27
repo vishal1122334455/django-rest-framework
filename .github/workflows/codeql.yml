@@ -82,3 +82,13 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: devops
+        SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+        SLACK_ICON: https://github.com/rtCamp.png?size=48
+        SLACK_MESSAGE: 'Report: https://github.com/vishal1122334455/django-rest-framework/security/code-scanning :rocket:'
+        SLACK_TITLE: CodeQL scanning alert
+        SLACK_USERNAME: Testing
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
